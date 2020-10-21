@@ -1,0 +1,37 @@
+MAIL_SERVER = 'smtp.gmail.com'
+MAIL_USERNAME = 'x@gmail.com'
+MAIL_PASSWORD = 'X'
+MAIL_DEFAULT_SENDER = 'x@gmail.com'
+MAIL_PORT = 465
+MAIL_USE_SSL = True
+MAIL_USE_TSL = False
+
+in config.cfg
+
+in app.py:
+app.config.from_pyfile('config.cfg')
+
+-------------------------------------------------------------------------
+
+TO USE FLASK-USER V1.0 INSTEAD FLASK-USER V0.6
+type this in User model after the confirmed_at attribute:
+
+# If the actual property (confirmed_at) name
+# differs from required name (email_confirmed_at).
+class User(db.Model, UserMixin)
+        ...
+    # Actual property
+    confirmed_at = db.Column(db.DateTime())
+
+    # Map required property name to actual property
+    @property
+    def email_confirmed_at(self):
+        return self.confirmed_at
+
+    @email_confirmed_at.setter
+    def email_confirmed_at(self, value):
+        self.confirmed_at = value
+
+---------------------------------------------------------------------------
+
+>Use JADE and TempMail
